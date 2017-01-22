@@ -3,7 +3,7 @@
  * author: Tom Ginader
  * course: MSCS 630
  * assignment: lab 1
- * due date: Januaray 22, 2017
+ * due date: Januaray 25, 2017
  * version: 1.0
  *
  * This file contains a program that turns character strings into a number string equivalent.
