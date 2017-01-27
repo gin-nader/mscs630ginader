@@ -29,18 +29,13 @@ public class CharacterToNumber {
   public static void main(String[] args) {
     Scanner sc =new Scanner(System.in);
 
-    System.out.println("How many lines to you wish to encrypt?");
-    int lines = sc.nextInt();
-    sc.nextLine();
-    //This eats the new line character after you hit enter
-    System.out.println("Enter the plaintext message you wish to encrypt.");
-
     List<String> input = new ArrayList();
 
-    while (lines != 0) {
+    System.out.println("Enter the message you wish to encrypt:");
+
+    while (sc.hasNext()) {
       String inputString = sc.nextLine();
       input.add(inputString);
-      lines--;
     }
 
     int[] output;
