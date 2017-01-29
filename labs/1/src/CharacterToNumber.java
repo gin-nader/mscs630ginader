@@ -3,7 +3,7 @@
  * author: Tom Ginader
  * course: MSCS 630
  * assignment: lab 1
- * due date: Januaray 25, 2017
+ * due date: January 25, 2017
  * version: 1.0
  *
  * This file contains a program that turns character strings into a number string equivalent.
@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * CharacterToNumber.java
+ * CharacterToNumber
  *
  * This class takes character string plaintext input by a user and the output corresponds to the
  * position of the characters in the alphabet.
  * A = 0, Z = 25 etc.
  * Spaces = 26
  *
- * The user specifies how many lines of plaintext he wishes to encrypt. The user then inputs the lines in the console.
+ * The user then inputs the lines in the console.
  * The output displays afterwards with the corresponding lines now encrypted.
  */
 public class CharacterToNumber {
