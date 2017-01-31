@@ -1,0 +1,11 @@
+
+T
+squid:S106";Replace this usage of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ
+lsquid:S00117"VRename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó‘˜
+Tsquid:S1118":Add a private constructor to hide the implicit public one.(€±Şüÿÿÿÿ
+qsquid:S00117"VRename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÚ‹èùÿÿÿÿ
+T
+squid:S106";Replace this usage of System.out or System.err by a logger.(”¦ô„ûÿÿÿÿ
+1squid:S1220""Move this file to a named package.
+T
+squid:S106";Replace this usage of System.out or System.err by a logger.(¬Ä¡ûúÿÿÿÿ
