@@ -37,9 +37,9 @@ public class EuclideanAlgorithm {
 
     long output;
 
-    int a = 0;
-    int b = 0;
-    String[] inputNumbers = new String[input.size()*2];
+    int a;
+    int b;
+    String[] inputNumbers;
 
     for(int j = 0; j < input.size(); j++) {
       inputNumbers = input.get(j).split("\\s");
@@ -49,9 +49,6 @@ public class EuclideanAlgorithm {
       System.out.println(output);
     }
     sc.close();
-
-    //System.out.println("\nGCD = " + euclidAlg(270,192));
-
   }
 
   /**
@@ -76,7 +73,7 @@ public class EuclideanAlgorithm {
 
 
     if(a < b){
-      long temp = 0;
+      long temp;
       temp = a;
       a = b;
       b = temp;
