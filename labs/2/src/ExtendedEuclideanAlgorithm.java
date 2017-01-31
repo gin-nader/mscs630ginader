@@ -87,35 +87,34 @@ public class ExtendedEuclideanAlgorithm {
 
         long q;
         long r = -1;
-        long x = 0, finalY = 0;
-        long y = 1, finalX = 1;
+        long[] x = {1, 0, -1};
+        long[] y = {0, 1, -1};
         long d = -1;
         final int FINAL_R = 0;
 
         while(r != 0){
             q = a/b;
             r = a - (q * b);
-
             a = b;
             b = r;
 
-            temp = x;
-            x = finalX - q * x;
-            finalX = temp;
+            // Need our d, x, and y values before the last iteration
+            if(r > FINAL_R) {
+                x[2] = x[1];
+                x[1] = x[0] - (q * x[1]);
+                x[0] = x[2];
 
-            temp = y;
-            y = finalY - q * y;
-            finalY = temp;
+                y[2] = y[1];
+                y[1] = y[0] - (q * y[1]);
+                y[0] = y[2];
 
-            // Need the remainder right before the last iteration to get the GCD.
-            if(r > FINAL_R){
                 d = r;
             }
-        }
 
+        }
         answer[0] = d;
-        answer[1] = finalX;
-        answer[2] = finalY;
+        answer[1] = x[1];
+        answer[2] = y[1];
 
         return answer;
     }
