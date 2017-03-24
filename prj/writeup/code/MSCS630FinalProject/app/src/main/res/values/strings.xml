@@ -2,4 +2,7 @@
     <string name="app_name">MSCS 630 Final Project</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="title_activity_sms">Send SMS</string>
+    <string name="title_activity_sms_receiver">SmsReceiver</string>
+    <string name="button_inbox">To Inbox</string>
 </resources>

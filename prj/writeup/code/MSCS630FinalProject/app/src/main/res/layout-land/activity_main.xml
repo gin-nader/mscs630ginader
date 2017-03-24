@@ -3,16 +3,12 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center_horizontal"
-    android:weightSum="1">
-
+    >
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Enter the phone number of recipient" />
-
+        android:text="Enter the phone number of recipient"
+        />
     <EditText
         android:id="@+id/txtPhoneNo"
         android:layout_width="fill_parent"
@@ -20,27 +16,27 @@
         />
     <TextView
         android:layout_width="fill_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:text="Message" />
-
+        android:text="Message"
+        />
     <EditText
         android:id="@+id/txtMessage"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="150px"
         android:gravity="top"
-        android:layout_weight="0.14" />
+        />
 
     <Button
         android:id="@+id/btnSendSMS"
-        android:layout_width="175dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Send SMS" />
+        android:text="Send SMS"
+        />
 
     <Button
         android:id="@+id/btnToInbox"
-        android:layout_width="178dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="To Inbox" />
-
+        android:text="To Inbox"
+        />
 </LinearLayout>
