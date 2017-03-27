@@ -1,0 +1,12 @@
+10 pts
+
+Thomas,
+
+The project idea seems interesting and challenging. Go for it!
+
+Here is a paper that might help you along the way:
+http://keccak.noekeon.org/Keccak-reference-3.0.pdf
+
+Peace,
+
+- Dr. Rivas
