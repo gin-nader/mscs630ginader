@@ -1,3 +1,7 @@
+/**
+ *  Code for how to send SMS message is taken from here: https://mobiforge.com/design-development/sms-messaging-android
+ * */
+
 package com.tomginader.mscs630finalproject;
 
 import android.app.PendingIntent;
