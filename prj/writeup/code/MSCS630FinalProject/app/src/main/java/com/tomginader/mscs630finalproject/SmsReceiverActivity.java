@@ -91,9 +91,9 @@ public class SmsReceiverActivity extends AppCompatActivity implements AdapterVie
             smsMessageStr += smsMessage;
             String senderHmac = smsMessage.substring(smsMessage.lastIndexOf(":")+1);
             System.out.println(senderHmac);
-            int receiverHmac = MainActivity.hashFunction(smsMessage.substring(0,
-                                                  smsMessage.indexOf(":") - 4),key);
-            if(Integer.parseInt(senderHmac) == receiverHmac) {
+            String receiverHmac = MainActivity.hashFunction(smsMessage.substring(0,
+                                                  smsMessage.indexOf(":") - 4),key.toString());
+            if(senderHmac.equals(receiverHmac)) {
                 Toast.makeText(this, "This message is verified and has not been altered.",
                                                                     Toast.LENGTH_SHORT).show();
             }
@@ -105,4 +105,6 @@ public class SmsReceiverActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
     }
+
+
 }
