@@ -2,8 +2,8 @@
  * file: AESCipher.Java
  * author: Tom Ginader
  * course: MSCS 630
- * assignment: lab 4
- * due date: April 5, 2017
+ * assignment: lab 5
+ * due date: April 19, 2017
  * version: 1.0
  *
  * This file contains a program that implements the AES security encryption algorithm. It takes a user submitted key
@@ -151,39 +151,45 @@ public class AESCipher {
     return col;
   }
 
+  /**
+   * http://stackoverflow.com/questions/7259099/java-aes-encrypt-with-specified-key
+   *
+   * AESStateXOR
+   *
+   * This function takes in two 4x4 matrices. One matrix is the plaintext or state of the text depending on the round
+   * in AES. It also takes the corresponding round key. It then XORs the text matrix with the key matrix and stores
+   * it in the return matrix which the method returns.
+   *
+   * Parameters:
+   *   sHex: This is the user input plaintext matrix or the state of the text depending on the AES round
+   *   keyHEX: This is the corresponding round key in a matrix
+   *
+   * Return value: The 4x4 matrix 2d array that stores the result
+   */
   public static int[][] AESStateXOR(int[][] sHex, int[][] keyHex){
     int[][] returnMatrix = new int[4][4];
-    for (int row = 0; row < 4; row++) {
-      for (int col = 0; col < 4; col++) {
-        System.out.print(Integer.toHexString(sHex[row][col]).toUpperCase() + " ");
-      }
-      System.out.println();
-    }
-
-    for (int row = 0; row < 4; row++) {
-      for (int col = 0; col < 4; col++) {
-        System.out.print(Integer.toHexString(keyHex[row][col]).toUpperCase() + " ");
-      }
-      System.out.println();
-    }
-
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
         returnMatrix[row][col] = sHex[row][col] ^ keyHex[row][col];
       }
     }
-
-    for (int row = 0; row < 4; row++) {
-      for (int col = 0; col < 4; col++) {
-        System.out.print(String.format("%02x", returnMatrix[row][col]).toUpperCase() + " ");
-      }
-      System.out.println();
-    }
-
-
     return returnMatrix;
   }
 
+  /**
+   *
+   * AESNibbleSub
+   *
+   * This function takes in the plaintext or current state of the text depending on the AES round. It then takes
+   * that matrix and breaks it up into 4 columns. It then takes each column it runs it through the aesSBox method
+   * which returns the column after the hex has been substituted using the S Box. It then combines the four columns
+   * and stores them in the result matrix which it then returns.
+   *
+   * Parameters:
+   *   inStateHex: A 4x4 matrix of the plaintext or current state of the hex
+   *
+   * Return value: The result matrix which contains the inStateHex after it has been nibble substituted
+   */
   public static int[][] AESNibbleSub(int[][] inStateHex){
     int[] firstColumn = new int[4];
     for (int row = 0; row < 4; row++) {
@@ -191,9 +197,8 @@ public class AESCipher {
         firstColumn[col] = inStateHex[col][0];
       }
     }
-    System.out.println("first column first char" + firstColumn[0]);
+
     firstColumn = aesSBox(firstColumn);
-    System.out.println("first column first char" + String.format("%02x", firstColumn[0]));
 
     int[] secondColumn = new int[4];
     for (int row = 0; row < 4; row++) {
@@ -223,7 +228,6 @@ public class AESCipher {
     fourthColumn = aesSBox(fourthColumn);
 
     int[][] resultMatrix = new int[4][4];
-
     for (int i = 0; i < 4; i++)
     {
       resultMatrix[i][0] = firstColumn[i];
@@ -231,17 +235,23 @@ public class AESCipher {
       resultMatrix[i][2] = thirdColumn[i];
       resultMatrix[i][3] = fourthColumn[i];
     }
-
-    for (int row = 0; row < 4; row++) {
-      for (int col = 0; col < 4; col++) {
-        System.out.print(String.format("%02x", resultMatrix[row][col]).toUpperCase() + " ");
-      }
-      System.out.println();
-    }
-
     return resultMatrix;
   }
 
+  /**
+   *
+   * AESShiftRow
+   *
+   * This function takes the plaintext or current state of the text based on the AES round. It then separates each
+   * row of the matrix and shifts them depending on the row. The first row does not get shifted at all. The second
+   * row gets shifted once, the third row gets shift twice, and the fourth row gets shifted three times. It then
+   * stores the rows in the result matrix and returns it.
+   *
+   * Parameters:
+   *   inStateHex: This is the 4x4 matrix for the current state of the hex
+   *
+   * Return value: The result matrix which contains the newly shifted rows
+   */
   public static int[][] AESShiftRow(int[][] inStateHex){
     int[][] resultMatrix = new int[4][4];
 
@@ -259,32 +269,17 @@ public class AESCipher {
       }
     }
 
-    System.out.print("Second row pre shift: ");
-    for(int i = 0; i < secondRow.length; i++){
-      System.out.print(String.format("%02x",secondRow[i]).toUpperCase() + " ");
-    }
-
     int first = secondRow[0];
     for (int i = 1; i < secondRow.length; i++) {
       secondRow[i - 1] = secondRow[i];
     }
     secondRow[secondRow.length - 1] = first;
 
-    System.out.print("Second row post shift: ");
-    for(int i = 0; i < secondRow.length; i++){
-      System.out.print(String.format("%02x",secondRow[i]).toUpperCase() + " ");
-    }
-
     int[] thirdRow = new int[4];
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
         thirdRow[row] = inStateHex[2][row];
       }
-    }
-
-    System.out.print("\nThird row pre shift: ");
-    for(int i = 0; i < thirdRow.length; i++){
-      System.out.print(String.format("%02x",thirdRow[i]).toUpperCase() + " ");
     }
 
     first = thirdRow[0];
@@ -297,21 +292,11 @@ public class AESCipher {
     thirdRow[2] = first;
     thirdRow[3] = second;
 
-    System.out.print("Third row post shift: ");
-    for(int i = 0; i < thirdRow.length; i++){
-      System.out.print(String.format("%02x",thirdRow[i]).toUpperCase() + " ");
-    }
-
     int[] fourthRow = new int[4];
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
         fourthRow[row] = inStateHex[3][row];
       }
-    }
-
-    System.out.print("\nfourth row pre shift: ");
-    for(int i = 0; i < fourthRow.length; i++){
-      System.out.print(String.format("%02x",fourthRow[i]).toUpperCase() + " ");
     }
 
     first = fourthRow[0];
@@ -324,11 +309,6 @@ public class AESCipher {
     fourthRow[2] = second;
     fourthRow[3] = third;
 
-    System.out.print("fourth row post shift: ");
-    for(int i = 0; i < fourthRow.length; i++){
-      System.out.print(String.format("%02x",fourthRow[i]).toUpperCase() + " ");
-    }
-
     for (int i = 0; i < 4; i++)
     {
       resultMatrix[0][i] = firstRow[i];
@@ -336,20 +316,29 @@ public class AESCipher {
       resultMatrix[2][i] = thirdRow[i];
       resultMatrix[3][i] = fourthRow[i];
     }
-
-    System.out.println();
-    for (int row = 0; row < 4; row++) {
-      for (int col = 0; col < 4; col++) {
-        System.out.print(String.format("%02x", resultMatrix[row][col]).toUpperCase() + " ");
-      }
-      System.out.println();
-    }
     return resultMatrix;
   }
 
+  /**
+   * multiply by 2 and multiply by 3 look up tables taken from here:
+   * https://en.wikipedia.org/wiki/Rijndael_mix_columns
+   * This is also where I learned the mix columns algorithm
+   *
+   * AESMixColumn
+   *
+   * This function takes in the plaintext matrix or the current state of the text depending on the AES round. It then
+   * uses an algorithm to mix the columns which involves arithmetic in Galois field. For this method, it takes one
+   * column at a time and solves the algorithm using a 4x4 matrix to produce a result matrix. It also uses a lookup
+   * table for multiply by 2 and multiply by 3 math. It then combines the four result columns and stores it in the
+   * 4x4 result matrix.
+   *
+   * Parameters:
+   *   inStateHex: This is the current state of the text based on the AES round
+   *
+   * Return value: This is the result matrix which contains the newly mixed columns
+   */
   public static int[][] AESMixColumn(int[][] inStateHex){
     int[][] resultMatrix = new int[4][4];
-
     int[] multiplyBy2 = {0x00,0x02,0x04,0x06,0x08,0x0a,0x0c,0x0e,0x10,0x12,0x14,0x16,0x18,0x1a,0x1c,0x1e,
         0x20,0x22,0x24,0x26,0x28,0x2a,0x2c,0x2e,0x30,0x32,0x34,0x36,0x38,0x3a,0x3c,0x3e,
         0x40,0x42,0x44,0x46,0x48,0x4a,0x4c,0x4e,0x50,0x52,0x54,0x56,0x58,0x5a,0x5c,0x5e,
@@ -366,7 +355,6 @@ public class AESCipher {
         0xbb,0xb9,0xbf,0xbd,0xb3,0xb1,0xb7,0xb5,0xab,0xa9,0xaf,0xad,0xa3,0xa1,0xa7,0xa5,
         0xdb,0xd9,0xdf,0xdd,0xd3,0xd1,0xd7,0xd5,0xcb,0xc9,0xcf,0xcd,0xc3,0xc1,0xc7,0xc5,
         0xfb,0xf9,0xff,0xfd,0xf3,0xf1,0xf7,0xf5,0xeb,0xe9,0xef,0xed,0xe3,0xe1,0xe7,0xe5};
-
     int[] multiplyBy3 = {0x00,0x03,0x06,0x05,0x0c,0x0f,0x0a,0x09,0x18,0x1b,0x1e,0x1d,0x14,0x17,0x12,0x11,
         0x30,0x33,0x36,0x35,0x3c,0x3f,0x3a,0x39,0x28,0x2b,0x2e,0x2d,0x24,0x27,0x22,0x21,
         0x60,0x63,0x66,0x65,0x6c,0x6f,0x6a,0x69,0x78,0x7b,0x7e,0x7d,0x74,0x77,0x72,0x71,
@@ -396,10 +384,96 @@ public class AESCipher {
     resultMatrix[2][0] = firstColumn[0] ^ firstColumn[1] ^ multiplyBy2[firstColumn[2]] ^ multiplyBy3[firstColumn[3]];
     resultMatrix[3][0] = multiplyBy3[firstColumn[0]] ^ firstColumn[1] ^ firstColumn[2] ^ multiplyBy2[firstColumn[3]];
 
-    for(int i = 0; i < 4; i ++){
-      System.out.print(String.format("%02x", resultMatrix[i][0]).toUpperCase() + " ");
+    int[] secondColumn = new int[4];
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        secondColumn[col] = inStateHex[col][1];
+      }
     }
 
+    resultMatrix[0][1] = multiplyBy2[secondColumn[0]] ^ multiplyBy3[secondColumn[1]] ^ secondColumn[2] ^ secondColumn[3];
+    resultMatrix[1][1] = secondColumn[0] ^ multiplyBy2[secondColumn[1]] ^ multiplyBy3[secondColumn[2]] ^ secondColumn[3];
+    resultMatrix[2][1] = secondColumn[0] ^ secondColumn[1] ^ multiplyBy2[secondColumn[2]] ^ multiplyBy3[secondColumn[3]];
+    resultMatrix[3][1] = multiplyBy3[secondColumn[0]] ^ secondColumn[1] ^ secondColumn[2] ^ multiplyBy2[secondColumn[3]];
+
+    int[] thirdColumn = new int[4];
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        thirdColumn[col] = inStateHex[col][2];
+      }
+    }
+
+    resultMatrix[0][2] = multiplyBy2[thirdColumn[0]] ^ multiplyBy3[thirdColumn[1]] ^ thirdColumn[2] ^ thirdColumn[3];
+    resultMatrix[1][2] = thirdColumn[0] ^ multiplyBy2[thirdColumn[1]] ^ multiplyBy3[thirdColumn[2]] ^ thirdColumn[3];
+    resultMatrix[2][2] = thirdColumn[0] ^ thirdColumn[1] ^ multiplyBy2[thirdColumn[2]] ^ multiplyBy3[thirdColumn[3]];
+    resultMatrix[3][2] = multiplyBy3[thirdColumn[0]] ^ thirdColumn[1] ^ thirdColumn[2] ^ multiplyBy2[thirdColumn[3]];
+
+    int[] fourthColumn = new int[4];
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        fourthColumn[col] = inStateHex[col][3];
+      }
+    }
+
+    resultMatrix[0][3] = multiplyBy2[fourthColumn[0]] ^ multiplyBy3[fourthColumn[1]] ^ fourthColumn[2] ^ fourthColumn[3];
+    resultMatrix[1][3] = fourthColumn[0] ^ multiplyBy2[fourthColumn[1]] ^ multiplyBy3[fourthColumn[2]] ^ fourthColumn[3];
+    resultMatrix[2][3] = fourthColumn[0] ^ fourthColumn[1] ^ multiplyBy2[fourthColumn[2]] ^ multiplyBy3[fourthColumn[3]];
+    resultMatrix[3][3] = multiplyBy3[fourthColumn[0]] ^ fourthColumn[1] ^ fourthColumn[2] ^ multiplyBy2[fourthColumn[3]];
+
     return resultMatrix;
+  }
+
+  public static String AES(String pTextHex, String keyHex){
+    String cTextHex = "";
+    String[] roundKeysHex = aesRoundKeys(keyHex);
+
+    int[][] sHex = new int[4][4];
+    int begin = 0;
+    int end = 2;
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        sHex[col][row] = Integer.parseInt(pTextHex.substring(begin, end), 16);
+        begin += 2;
+        end += 2;
+      }
+    }
+
+    int[][] keyMatrix = new int[4][4];
+    int begin2 = 0;
+    int end2 = 2;
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        keyMatrix[col][row] = Integer.parseInt(roundKeysHex[0].substring(begin2, end2), 16);
+        begin2 += 2;
+        end2 += 2;
+      }
+    }
+
+    int[][] outStateHex = new int[4][4];
+    outStateHex = AESStateXOR(sHex, keyMatrix);
+    for(int i = 1; i < 11; i++){
+      outStateHex = AESNibbleSub(outStateHex);
+      outStateHex = AESShiftRow(outStateHex);
+      if(i < 10) {
+        outStateHex = AESMixColumn(outStateHex);
+      }
+      begin = 0;
+      end = 2;
+      for (int row = 0; row < 4; row++) {
+        for (int col = 0; col < 4; col++) {
+          keyMatrix[col][row] = Integer.parseInt(roundKeysHex[i].substring(begin, end), 16);
+          begin += 2;
+          end += 2;
+        }
+      }
+      outStateHex = AESStateXOR(outStateHex, keyMatrix);
+    }
+
+    for (int row = 0; row < 4; row++) {
+      for (int col = 0; col < 4; col++) {
+        cTextHex += String.format("%02x", outStateHex[row][col]).toUpperCase();
+      }
+    }
+    return cTextHex;
   }
 }
