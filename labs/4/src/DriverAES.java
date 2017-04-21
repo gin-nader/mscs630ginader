@@ -13,10 +13,10 @@ import java.util.Scanner;
 /**
  * Driver AES
  *
- * This class takes a user submitted 128 bit key in hex. It then passes that key to aesCipher.java using the aesRoundKeys
- * method. The aesRoundkeys method takes the first key and performs AES rounds on it 10 times. The first round key is the
- * same as the user submitted key. The method then returns an array of Strings that contains all 11 keys. Driver AES then
- * displays all 11 keys to the user.
+ * This class takes a user submitted 128 bit key in hex. It then passes that key to aesCipher.java using the
+ * aesRoundKeys method. The aesRoundkeys method takes the first key and performs AES rounds on it 10 times. The first
+ * round key is the same as the user submitted key. The method then returns an array of Strings that contains all 11
+ * keys. Driver AES then displays all 11 keys to the user.
  */
 public class DriverAES {
 

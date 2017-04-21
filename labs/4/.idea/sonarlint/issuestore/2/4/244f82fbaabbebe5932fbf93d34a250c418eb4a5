@@ -1,7 +1,7 @@
 
-1squid:S1643"Use a StringBuilder instead.(Ï“ß×
-6squid:S1643"Use a StringBuilder instead.(ŠÏ›Äýÿÿÿÿ
-Ysquid:S1226"?Introduce a new variable instead of reusing the parameter "kh".(¨ö‰Ùùÿÿÿÿ
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(¨„´ùÿÿÿÿÿ8Ü§ÀŽ¹+
+8squid:S1643"Use a StringBuilder instead.(Ï“ß×8Ü§ÀŽ¹+
+`squid:S1226"?Introduce a new variable instead of reusing the parameter "kh".(¨ö‰Ùùÿÿÿÿ8Ü§ÀŽ¹+
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(üÚ£ª8Ü§ÀŽ¹+
+=squid:S1643"Use a StringBuilder instead.(ŠÏ›Äýÿÿÿÿ8Ü§ÀŽ¹+
 1squid:S1220""Move this file to a named package.
-lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(¨„´ùÿÿÿÿÿ
-Osquid:S1118":Add a private constructor to hide the implicit public one.(üÚ£ª

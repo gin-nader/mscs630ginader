@@ -7,8 +7,10 @@
  * version: 1.0
  *
  * This file contains a program that implements the AES security encryption algorithm. It takes a user submitted key
- * from DriverAES and performs 10 rounds on the key to create 11 round keys. The first round key is the user submitted key.
- * It involves sboxes and round constants to perform the algorithm.
+ * from DriverAES and performs 10 rounds on the key to create 11 round keys. The first round key is the user submitted
+ * key. It involves sboxes and round constants to perform the algorithm. It then uses the keys to perform the AES
+ * algorithm by using other methods that XOR the key with the plaintext, use nibble substitution, shift rows, and mix
+ * columns
  */
 
 
@@ -16,10 +18,11 @@
 /**
  * Cipher AES
  *
- * This class takes a 128bit key from the DriverAES class and performs the AES encryption algorithm on it. The end result
- * is 11 keys, where the first key is the original key taken from the user. In order to properly use the algorithm, the
- * class has two helper functions called aesRcon and aesSbox. These two functions contain static tables that help create
- * the AES round keys.
+ * This class takes a 128bit key from the DriverAES class and performs the AES encryption algorithm on it. The end
+ * result is 11 keys, where the first key is the original key taken from the user. In order to properly use the
+ * algorithm, the class has two helper functions called aesRcon and aesSbox. These two functions contain static tables
+ * that help create the AES round keys. It then uses the keys to XOR with the plaintext, and it will also use nibble
+ * substitution, shift rows, and mix columns.
  */
 public class AESCipher {
 
@@ -85,9 +88,9 @@ public class AESCipher {
    *
    * aesRcon
    *
-   * This function takes in the current round from the above method that is determined in the first for loop. Each round
-   * determines one of the round constants below. Round 1 relates to the first in the set, round 2 relates to the second,
-   * and so on. It then returns the round constant
+   * This function takes in the current round from the above method that is determined in the first for loop.
+   * Each round determines one of the round constants below. Round 1 relates to the first in the set, round 2 relates
+   * to the second, and so on. It then returns the round constant
    *
    * Parameters:
    *   round: This is the round that is determined by the first for loop above.
@@ -181,7 +184,7 @@ public class AESCipher {
    * AESNibbleSub
    *
    * This function takes in the plaintext or current state of the text depending on the AES round. It then takes
-   * that matrix and breaks it up into 4 columns. It then takes each column it runs it through the aesSBox method
+   * that matrix and breaks it up into 4 columns. It then takes each column and runs it through the aesSBox method
    * which returns the column after the hex has been substituted using the S Box. It then combines the four columns
    * and stores them in the result matrix which it then returns.
    *
@@ -391,10 +394,14 @@ public class AESCipher {
       }
     }
 
-    resultMatrix[0][1] = multiplyBy2[secondColumn[0]] ^ multiplyBy3[secondColumn[1]] ^ secondColumn[2] ^ secondColumn[3];
-    resultMatrix[1][1] = secondColumn[0] ^ multiplyBy2[secondColumn[1]] ^ multiplyBy3[secondColumn[2]] ^ secondColumn[3];
-    resultMatrix[2][1] = secondColumn[0] ^ secondColumn[1] ^ multiplyBy2[secondColumn[2]] ^ multiplyBy3[secondColumn[3]];
-    resultMatrix[3][1] = multiplyBy3[secondColumn[0]] ^ secondColumn[1] ^ secondColumn[2] ^ multiplyBy2[secondColumn[3]];
+    resultMatrix[0][1] = multiplyBy2[secondColumn[0]] ^ multiplyBy3[secondColumn[1]] ^ secondColumn[2] ^
+                                                                                              secondColumn[3];
+    resultMatrix[1][1] = secondColumn[0] ^ multiplyBy2[secondColumn[1]] ^ multiplyBy3[secondColumn[2]] ^
+                                                                                                    secondColumn[3];
+    resultMatrix[2][1] = secondColumn[0] ^ secondColumn[1] ^ multiplyBy2[secondColumn[2]] ^
+                                                                                      multiplyBy3[secondColumn[3]];
+    resultMatrix[3][1] = multiplyBy3[secondColumn[0]] ^ secondColumn[1] ^ secondColumn[2] ^
+                                                                                      multiplyBy2[secondColumn[3]];
 
     int[] thirdColumn = new int[4];
     for (int row = 0; row < 4; row++) {
@@ -415,14 +422,34 @@ public class AESCipher {
       }
     }
 
-    resultMatrix[0][3] = multiplyBy2[fourthColumn[0]] ^ multiplyBy3[fourthColumn[1]] ^ fourthColumn[2] ^ fourthColumn[3];
-    resultMatrix[1][3] = fourthColumn[0] ^ multiplyBy2[fourthColumn[1]] ^ multiplyBy3[fourthColumn[2]] ^ fourthColumn[3];
-    resultMatrix[2][3] = fourthColumn[0] ^ fourthColumn[1] ^ multiplyBy2[fourthColumn[2]] ^ multiplyBy3[fourthColumn[3]];
-    resultMatrix[3][3] = multiplyBy3[fourthColumn[0]] ^ fourthColumn[1] ^ fourthColumn[2] ^ multiplyBy2[fourthColumn[3]];
+    resultMatrix[0][3] = multiplyBy2[fourthColumn[0]] ^ multiplyBy3[fourthColumn[1]] ^ fourthColumn[2] ^
+                                                                                              fourthColumn[3];
+    resultMatrix[1][3] = fourthColumn[0] ^ multiplyBy2[fourthColumn[1]] ^ multiplyBy3[fourthColumn[2]] ^
+                                                                                            fourthColumn[3];
+    resultMatrix[2][3] = fourthColumn[0] ^ fourthColumn[1] ^ multiplyBy2[fourthColumn[2]] ^
+                                                                                      multiplyBy3[fourthColumn[3]];
+    resultMatrix[3][3] = multiplyBy3[fourthColumn[0]] ^ fourthColumn[1] ^ fourthColumn[2] ^
+                                                                                  multiplyBy2[fourthColumn[3]];
 
     return resultMatrix;
   }
 
+  /**
+   *
+   * AES
+   *
+   * This function uses all of the above functions to perform the actual AES algorithm. This is the only function that
+   * DriverAES calls, and it takes in the user submitted plain text and key. It then will perform the algorithm by
+   * XORing the key with the plaintext then going through 11 rounds of nibble substitution, shifting rows, and
+   * mixing columns. It will not mix columns on the last round. It then stores the result in a string which is the
+   * newly created cipher text.
+   *
+   * Parameters:
+   *   pTextHex: the plaintext entered by the user
+   *   keyHex: the 128 bit key entered by the user
+   *
+   * Return value: This is the ciphertext created by encrypting the user's plaintext.
+   */
   public static String AES(String pTextHex, String keyHex){
     String cTextHex = "";
     String[] roundKeysHex = aesRoundKeys(keyHex);
@@ -451,6 +478,7 @@ public class AESCipher {
 
     int[][] outStateHex = new int[4][4];
     outStateHex = AESStateXOR(sHex, keyMatrix);
+
     for(int i = 1; i < 11; i++){
       outStateHex = AESNibbleSub(outStateHex);
       outStateHex = AESShiftRow(outStateHex);
@@ -471,7 +499,7 @@ public class AESCipher {
 
     for (int row = 0; row < 4; row++) {
       for (int col = 0; col < 4; col++) {
-        cTextHex += String.format("%02x", outStateHex[row][col]).toUpperCase();
+        cTextHex += String.format("%02x", outStateHex[col][row]).toUpperCase();
       }
     }
     return cTextHex;

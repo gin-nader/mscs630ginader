@@ -6,18 +6,19 @@
  * due date: April 19, 2017
  * version: 1.0
  *
- * This file contains a program that calls AESCipher using the aesRoundKeys method. It uses a user inputted key as the
- * parameter. The method then returns 11 round keys using the AES algorithm
+ * This file contains a program that calls AESCipher using the AES method. It uses a user inputted plaintext and
+ * key as the parameters. The method then will then perform the AES encryption algorithm which will return the
+ * corresponding ciphertext.
  */
 import java.util.Scanner;
 
 /**
  * Driver AES
  *
- * This class takes a user submitted 128 bit key in hex. It then passes that key to aesCipher.java using the aesRoundKeys
- * method. The aesRoundkeys method takes the first key and performs AES rounds on it 10 times. The first round key is the
- * same as the user submitted key. The method then returns an array of Strings that contains all 11 keys. Driver AES then
- * displays all 11 keys to the user.
+ * This class takes a user submitted plain text and 128 bit key in hex. It then passes that text and key to the
+ * aesCipher class using the AES method. The AES created 11 round keys, and performs the AES algorithm by XORing the
+ * key with the text, using nibble substitution, shifting rows, and mixing columns for 11 rounds. It will the return
+ * the ciphertext for the user's plaintext.
  */
 public class DriverAES {
 

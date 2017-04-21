@@ -7,8 +7,8 @@
  * version: 1.0
  *
  * This file contains a program that implements the AES security encryption algorithm. It takes a user submitted key
- * from DriverAES and performs 10 rounds on the key to create 11 round keys. The first round key is the user submitted key.
- * It involves sboxes and round constants to perform the algorithm.
+ * from DriverAES and performs 10 rounds on the key to create 11 round keys. The first round key is the user submitted
+ * key. It involves sboxes and round constants to perform the algorithm.
  */
 
 
@@ -16,10 +16,10 @@
 /**
  * Cipher AES
  *
- * This class takes a 128bit key from the DriverAES class and performs the AES encryption algorithm on it. The end result
- * is 11 keys, where the first key is the original key taken from the user. In order to properly use the algorithm, the
- * class has two helper functions called aesRcon and aesSbox. These two functions contain static tables that help create
- * the AES round keys.
+ * This class takes a 128bit key from the DriverAES class and performs the AES encryption algorithm on it. The end
+ * result is 11 keys, where the first key is the original key taken from the user. In order to properly use the
+ * algorithm, the class has two helper functions called aesRcon and aesSbox. These two functions contain static tables
+ * that help create the AES round keys.
  */
 public class AESCipher {
 
@@ -85,9 +85,9 @@ public class AESCipher {
    *
    * aesRcon
    *
-   * This function takes in the current round from the above method that is determined in the first for loop. Each round
-   * determines one of the round constants below. Round 1 relates to the first in the set, round 2 relates to the second,
-   * and so on. It then returns the round constant
+   * This function takes in the current round from the above method that is determined in the first for loop.
+   * Each round determines one of the round constants below. Round 1 relates to the first in the set, round 2 relates
+   * to the second, and so on. It then returns the round constant
    *
    * Parameters:
    *   round: This is the round that is determined by the first for loop above.

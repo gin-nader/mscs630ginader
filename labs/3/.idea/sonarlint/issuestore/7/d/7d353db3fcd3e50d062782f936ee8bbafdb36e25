@@ -1,8 +1,8 @@
 
 T
 squid:S106";Replace this usage of System.out or System.err by a logger.(†ÍÅÀøÿÿÿÿ
-T
-squid:S106";Replace this usage of System.out or System.err by a logger.(ø»Å²ýÿÿÿÿ
-1squid:S1220""Move this file to a named package.
 lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(Ì¦À”ûÿÿÿÿ
 Osquid:S1118":Add a private constructor to hide the implicit public one.(°óëŽ
+1squid:S1220""Move this file to a named package.
+T
+squid:S106";Replace this usage of System.out or System.err by a logger.(ø»Å²ýÿÿÿÿ

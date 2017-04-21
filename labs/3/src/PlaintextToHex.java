@@ -6,9 +6,9 @@
  * due date: March 1, 2017
  * version: 1.0
  *
- * This file contains a program that takes user input of a substitution character and a line of plaintext. It then takes
- * that plaintext and runs it through a function that converts the plaintext into individual integers and stores it in a
- * 2d array that acts as a 4x4 matrix. It the displays the 2d array and converts the integers into hex.
+ * This file contains a program that takes user input of a substitution character and a line of plaintext. It then
+ * takes that plaintext and runs it through a function that converts the plaintext into individual integers and stores
+ * it in a 2d array that acts as a 4x4 matrix. It the displays the 2d array and converts the integers into hex.
  */
 import java.util.Scanner;
 
@@ -17,11 +17,12 @@ import java.util.Scanner;
  *
  * This class takes a user submitted substitution character and a line of plaintext. This plaintext is ran through the
  * getHexMatP function. If the line of plaintext is less than or equal to 16 characters long then it calls the function
- * once and it will result in only one 4x4 matrix. The matrix is always 16 two digit hex characters, so if the plaintext
- * is not 16 characters long than it fills in the rest of the space with the substitution character.
+ * once and it will result in only one 4x4 matrix. The matrix is always 16 two digit hex characters, so if the
+ * plaintext is not 16 characters long than it fills in the rest of the space with the substitution character.
  *
- * If the plaintext is longer than 16 characters, then it calls the function multiple times and breaks the plaintext down
- * into multiple substrings. Each substring is ran through the function and results in a separate matrix per substring.
+ * If the plaintext is longer than 16 characters, then it calls the function multiple times and breaks the plaintext
+ * down into multiple substrings. Each substring is ran through the function and results in a separate matrix per
+ * substring.
  */
 public class PlaintextToHex {
 

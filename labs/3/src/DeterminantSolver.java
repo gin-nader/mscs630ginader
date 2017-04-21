@@ -20,8 +20,8 @@ import java.util.Scanner;
  * determines the size of the matrix, and the matrix is then ran through an algorithm to find it's determinant. The
  * integers inputted to make up the matrix are stored in a 2d array.
  *
- * The purpose of this is that an easy way to find out if a matrix is invertible is to take its determinant and see if the
- * gcd with m equals one. So, finding the determinant is the first step in the process. The determinant is the only
+ * The purpose of this is that an easy way to find out if a matrix is invertible is to take its determinant and see if
+ * the gcd with m equals one. So, finding the determinant is the first step in the process. The determinant is the only
  * output for this program.
  */
 public class DeterminantSolver {
