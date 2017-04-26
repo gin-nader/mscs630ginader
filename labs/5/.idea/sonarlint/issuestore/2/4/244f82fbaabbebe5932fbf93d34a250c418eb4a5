@@ -1,0 +1,10 @@
+
+=squid:S1643"Use a StringBuilder instead.(–è¦şÿÿÿÿ8íãã¹+
+`squid:S1854"?Remove this useless assignment to local variable "outStateHex".( öˆÚıÿÿÿÿ8­££¹+
+1squid:S1220""Move this file to a named package.
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(¨„´ùÿÿÿÿÿ8‰¿¹+
+`squid:S1226"?Introduce a new variable instead of reusing the parameter "kh".(¨ö‰Ùùÿÿÿÿ8‰¿¹+
+=squid:S1643"Use a StringBuilder instead.(ŠÏ›Äıÿÿÿÿ8‰¿¹+
+8squid:S1643"Use a StringBuilder instead.(Ï“ß×8‰¿¹+
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(üÚ£ª8‰¿¹+
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¿ºËšûÿÿÿÿ8­££¹+

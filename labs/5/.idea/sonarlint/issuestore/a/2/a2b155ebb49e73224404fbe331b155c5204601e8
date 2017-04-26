@@ -1,0 +1,7 @@
+
+1squid:S1220""Move this file to a named package.
+[
+squid:S106";Replace this usage of System.out or System.err by a logger.(±ìßµÿÿÿÿÿ8™Œ¹+
+Vsquid:S2209"5Change this instance-reference to a static reference.(¢æêÎıÿÿÿÿ8™Œ¹+
+Esquid:S2440")Remove this instantiation of "AESCipher".(³Ì­…8™Œ¹+
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(‹èÎó8™Œ¹+

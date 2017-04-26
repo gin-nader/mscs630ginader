@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 // bouncy castle SHA3
 import org.bouncycastle.jcajce.provider.digest.SHA3;
-import org.bouncycastle.jcajce.provider.digest.*;
 
 
 

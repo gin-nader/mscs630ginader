@@ -42,7 +42,8 @@ public class SmsReceiverActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_receiver);
         smsListView = (ListView) findViewById(R.id.SMSList);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, smsMessagesList);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                                    smsMessagesList);
         smsListView.setAdapter(arrayAdapter);
         smsListView.setOnItemClickListener(this);
 
@@ -61,7 +62,8 @@ public class SmsReceiverActivity extends AppCompatActivity implements AdapterVie
 
     public void refreshSmsInbox() {
         ContentResolver contentResolver = getContentResolver();
-        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
+        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"),
+                                null, null, null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
@@ -87,8 +89,6 @@ public class SmsReceiverActivity extends AppCompatActivity implements AdapterVie
                 smsMessage += smsMessages[i];
             }
 
-            String smsMessageStr = address + "\n";
-            smsMessageStr += smsMessage;
             String senderHmac = smsMessage.substring(smsMessage.lastIndexOf(":")+1);
             System.out.println(senderHmac);
             String receiverHmac = MainActivity.hashFunction(smsMessage.substring(0,
