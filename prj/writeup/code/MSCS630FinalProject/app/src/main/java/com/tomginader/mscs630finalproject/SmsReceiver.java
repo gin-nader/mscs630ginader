@@ -1,5 +1,6 @@
 /**
- * Code for receiving SMS messages is taken from here: http://javapapers.com/android/android-receive-sms-tutorial/
+ * Code for receiving SMS messages is derived from here:
+ * http://javapapers.com/android/android-receive-sms-tutorial/
  */
 
 package com.tomginader.mscs630finalproject;
@@ -10,9 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
-
-import static com.tomginader.mscs630finalproject.MainActivity.key;
-
 
 public class SmsReceiver extends BroadcastReceiver {
     public static final String SMS_BUNDLE = "pdus";

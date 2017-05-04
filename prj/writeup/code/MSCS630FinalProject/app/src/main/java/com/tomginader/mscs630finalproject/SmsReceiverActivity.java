@@ -1,5 +1,6 @@
 /**
- * Code for receiving SMS messages is taken from here: http://javapapers.com/android/android-receive-sms-tutorial/
+ * Code for receiving SMS messages is derived from here:
+ * http://javapapers.com/android/android-receive-sms-tutorial/
  */
 
 package com.tomginader.mscs630finalproject;
