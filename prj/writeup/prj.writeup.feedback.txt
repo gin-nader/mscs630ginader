@@ -1,0 +1,12 @@
+38 pts
+
+The project attempts to make an app.
+The idea has good merit. 
+
+However, there are some issues...
+Writeup:
+- There are typos in the document. -1pt
+
+Code:
+- There is incorrect indentation. -1pt
+
